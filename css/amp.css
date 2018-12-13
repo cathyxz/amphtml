@@ -791,7 +791,8 @@ amp-accordion > section[expanded] > :last-child {
  * where amp-list becomes a container via the resizable-children attribute, the
  * loader should be fully hidden and not take up space.
  */
- amp-list[resizable-children] > .i-amphtml-loading-container.amp-hidden {
+ amp-list[resizable-children] > .i-amphtml-loading-container.amp-hidden,
+ amp-list[load-more] > .i-amphtml-loading-container.amp-hidden {
   display: none !important;
 }
 
@@ -802,7 +803,7 @@ amp-list[load-more] [load-more-button],
 amp-list[load-more] [load-more-end],
 amp-list[load-more] [load-more-button] > .i-amphtml-loader
 {
-  display: none;
+  visibility: hidden;
 }
 
 /**
