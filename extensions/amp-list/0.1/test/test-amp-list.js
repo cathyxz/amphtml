@@ -26,6 +26,11 @@ describes.repeated('amp-list', {
       {templateType: 'script'},
   'with template[type=amp-mustache]':
       {templateType: 'template'},
+  'with amp-list-load-more and template[type=amp-mustache]':
+      {templateType: 'template', experiments: ['amp-list-load-more']},
+  'with amp-list-load-more and script[type=text/plain][template=amp-mustache]':
+      {templateType: 'script', experiments: ['amp-list-load-more']},
+
 }, (name, variant) => {
 
   describes.realWin('amp-list component', {
@@ -69,7 +74,13 @@ describes.repeated('amp-list', {
       element.getPlaceholder = () => null;
       element.getResources = () => resources;
 
-      const {templateType} = variant;
+      const {templateType, experiments} = variant;
+      if (experiments) {
+        experiments.forEach(experimentName => {
+          toggleExperiment(win, experimentName, true);
+        });
+      }
+
       const template = doc.createElement(templateType);
 
       if (templateType == 'template') {
